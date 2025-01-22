@@ -50,4 +50,12 @@ pipeline {
             }
         }
     }
+
+    post {
+        success {
+            mail to: 'lcruzfarfan@gmail.com',
+                 subject: 'Pipeline ejecucion correcta',
+                 body: "El pipeline ${env.JOB_NAME} con el build numero ${env.BUILD_NUMBER} ha finalizado de manera correcta"
+        }
+    }
 }
