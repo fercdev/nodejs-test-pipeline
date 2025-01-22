@@ -8,6 +8,7 @@ app.get('/api/hello', (req, res) => {
 })
 
 app.get('/api/message', (req, res) => {
+    console.log('---INVOCANDO SERVICION MESSAGE---');
     res.json({message: 'Endpoint de message!'});
 })
 
