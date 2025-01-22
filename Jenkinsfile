@@ -50,4 +50,22 @@ pipeline {
             }
         }
     }
+
+    post {
+        success {
+            mail to: 'lcruzfarfan@gmail.com',
+                 subject: "Pipeline ${env.JOB_NAME} ejecucion correcta",
+                 body: """
+                 Hola,
+
+                 El pipeline '${env.JOB_NAME}' (Build #${env.BUILD_NUMBER}) ha finalizado de manera correcta
+
+                 Los detalles se pueden revisar en el siguiente enlace:
+                 ${env.BUILD_URL}
+
+                 Saludos,
+                 Jenkins Server
+                 """
+        }
+    }
 }
