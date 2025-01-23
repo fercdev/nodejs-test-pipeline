@@ -46,6 +46,7 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('sonarqube-server') {
+                        sh 'ls -la'
                         sh 'chmod +x /node_modules/.bin/sonar-scanner'
                         sh './node_modules/.bin/sonar-scanner'
                     }
