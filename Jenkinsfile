@@ -62,6 +62,28 @@ pipeline {
                 }
             }
         }
+
+        stage('Desplegar proyecto node a Digital ocean') {
+            when {
+                branch 'develop'
+            }
+            agent any
+
+            environment {
+                    DOCKER_REPO = 'fercdevv/jenkins-node'
+            }
+
+            steps {
+                sshagent(['droplet-ssh-key']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no root@104.248.48.92 "
+                        docker pull $DOCKER_REPO:latest &&
+                        docker run -d --name node_project -p 8080:3000 $DOCKER_REPO:latest
+                        "
+                    '''
+                }
+            }
+        }
     }
 
     post {
