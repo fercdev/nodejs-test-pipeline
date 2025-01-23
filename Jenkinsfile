@@ -47,7 +47,7 @@ pipeline {
                 script {
                     sonarScanner {
                         installationName: 'sonarqube-server',
-                        addtionalArguments: "-Dsonar.login=${SONARQUBE_TOKEN}"
+                        additionalArguments: "-Dsonar.login=${SONARQUBE_TOKEN}"
                     }
                 }
             }
