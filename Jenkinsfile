@@ -1,6 +1,10 @@
 pipeline {
     agent none
 
+    environment {
+        SONARQUBE_TOKEN = credentials('sonar-token')
+    }
+
     stages {
         stage('Instalar dependencias...') {
             agent {
@@ -38,17 +42,12 @@ pipeline {
         }
 
         stage('SonarQube Analisis...') {
-            agent {
-                docker {
-                    image 'node:18-alpine'
-                }
-            }
+            agent any
             steps {
                 script {
-                    withSonarQubeEnv('sonarqube-server') {
-                        sh 'ls -la'
-                        sh 'chmod +x /node_modules/.bin/sonar-scanner'
-                        sh './node_modules/.bin/sonar-scanner'
+                    sonarScanner {
+                        installationName: 'sonarqube-server',
+                        addtionalArguments: "-Dsonar.login=${SONARQUBE_TOKEN}"
                     }
                 }
             }
