@@ -45,7 +45,10 @@ pipeline {
             agent any
             steps {
                 script {
-                    sh "sonar-scanner -Dsonar.projectKey=nodejs-test-pipeline -Dsonar.projectName=nodejs-test-pipeline -Dsonar.projectVersion=1.0 -Dsonar.sources=. -Dsonar.test.inclusions=tests/**/* -Dsonar.exclusions=**/node_modules/** -Dsonar.host.url=http://104.248.48.92:9000/ -Dsonar.login=sqa_060613838a40fe3457a7080273a4427311f4964a"
+                    def scannerHome = tool 'SonarScanner';
+                    withSonarQubeEnv() {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
                 }
             }
         }
