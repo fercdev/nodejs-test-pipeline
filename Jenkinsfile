@@ -30,7 +30,7 @@ pipeline {
             agent any
             steps {
                 script {
-                    withSonarQubeEnv(SONARQUBE) {
+                    withSonarQubeEnv('sonarqube-server') {
                         sh './node_modules/.bin/sonar-scanner'
                     }
                 }
