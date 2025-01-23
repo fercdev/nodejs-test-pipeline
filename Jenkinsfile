@@ -26,6 +26,24 @@ pipeline {
             }
         }
 
+        stage('SonarQube Analisis...') {
+            agent any
+            steps {
+                script {
+                    withSonarQubeEnv(SONARQUBE) {
+                        sh './node_modules/.bin/sonar-scanner'
+                    }
+                }
+            }
+        }
+
+        stage('SonarQube quality gate...') {
+            agent any
+            steps {
+                waitForQualityGate abortPipeline: true
+            }
+        }
+
         stage('Construir y pushear imagen a dockerhub') {
             when {
                 branch 'develop'
