@@ -45,10 +45,10 @@ pipeline {
             agent any
             steps {
                 script {
-                    sonarScanner {
+                    sonarScanner (
                         installationName: 'SonarQube',
                         additionalArguments: "-Dsonar.login=${SONARQUBE_TOKEN}"
-                    }
+                    )
                 }
             }
         }
