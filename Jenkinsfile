@@ -26,6 +26,17 @@ pipeline {
             }
         }
 
+        stage('Listar carpetas y archivos del repo...') {
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                }
+            }
+            steps {
+                sh 'ls -la'
+            }
+        }
+
         stage('SonarQube Analisis...') {
             agent any
             steps {
