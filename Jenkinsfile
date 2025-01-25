@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         SONARQUBE_TOKEN = credentials('sonar-token')
+        CONTAINER_NAME_PROJECT = 'node_project'
     }
 
     stages {
@@ -95,6 +96,15 @@ pipeline {
                     sh 'ssh -o StrictHostKeyChecking=no root@142.93.115.84 "echo conexion correcta"'
                 }
             }
+        }
+
+        stage('Remover container en ejecucion antes de su actualizacion...') {
+            steps {
+                sh """
+                    docker rm -f ${CONTAINER_NAME_PROJECT} || true
+                """
+            }
+
         }
 
         stage('Desplegar proyecto node a Digital ocean') {
