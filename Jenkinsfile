@@ -104,11 +104,13 @@ pipeline {
             }
             agent any
             steps {
-                sh '''
-                    ssh -o StrictHostKeyChecking=no root@142.93.115.84 "
-                    docker rm -f $CONTAINER_NAME_PROJECT || true
-                    "
-                '''
+                sshagent(['droplet-ssh-key']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no root@142.93.115.84 "
+                        docker rm -f $CONTAINER_NAME_PROJECT || true
+                        "
+                    '''
+                }
             }
 
         }
