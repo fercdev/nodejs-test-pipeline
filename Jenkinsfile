@@ -99,6 +99,10 @@ pipeline {
         }
 
         stage('Remover container en ejecucion antes de su actualizacion...') {
+            when {
+                branch 'develop'
+            }
+            agent any
             steps {
                 sh """
                     docker rm -f ${CONTAINER_NAME_PROJECT} || true
