@@ -92,7 +92,7 @@ pipeline {
 
             steps {
                 sshagent(['droplet-ssh-key']) {
-                    sh 'ssh -o StrictHostKeyChecking=no root@104.248.48.92 "echo conexion correcta"'
+                    sh 'ssh -o StrictHostKeyChecking=no root@142.93.115.84 "echo conexion correcta"'
                 }
             }
         }
@@ -110,7 +110,7 @@ pipeline {
             steps {
                 sshagent(['droplet-ssh-key']) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no root@104.248.48.92 "
+                        ssh -o StrictHostKeyChecking=no root@142.93.115.84 "
                         docker pull $DOCKER_REPO:latest &&
                         docker run -d --name node_project -p 8080:3000 $DOCKER_REPO:latest
                         "
