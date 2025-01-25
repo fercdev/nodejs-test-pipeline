@@ -104,9 +104,11 @@ pipeline {
             }
             agent any
             steps {
-                sh """
-                    docker rm -f ${CONTAINER_NAME_PROJECT} || true
-                """
+                sh '''
+                    ssh -o StrictHostKeyChecking=no root@142.93.115.84 "
+                    docker rm -f $CONTAINER_NAME_PROJECT || true
+                    "
+                '''
             }
 
         }
